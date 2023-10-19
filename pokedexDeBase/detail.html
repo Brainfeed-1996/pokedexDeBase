@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Coucou</h1>
+
+     <div id="index"></div>
+     <div id="image_front"></div>
+     <div id="image_back"></div>
+     <div id="name"></div>
+     <script src="/detail.js"></script>
+     
+        <script>
+        // Step 2: Add a data-pokemon-number attribute to each Pokemon div
+results.forEach((pokemon, index) => {
+  const ceil = document.createElement('div')
+  ceil.classList.add('item')
+  const pokemonNumber = ++index
+
+  // Add the data-pokemon-number attribute to the div
+  ceil.setAttribute('data-pokemon-number', pokemonNumber)
+
+  // ...
+})
+
+// Step 3: Add a click event listener to each Pokemon div
+results.forEach((pokemon, index) => {
+  const ceil = document.createElement('div')
+  ceil.classList.add('item')
+  const pokemonNumber = ++index
+
+  // Add the data-pokemon-number attribute to the div
+  ceil.setAttribute('data-pokemon-number', pokemonNumber)
+
+  // Add a click event listener to the div
+  ceil.addEventListener('click', () => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonNumber}`)
+      .then(response => response.json())
+      .then(data => {
+        // Step 5: Get the corresponding elements in detail.html and set their content
+        const indexDiv = document.getElementById('index');
+        const imageFrontDiv = document.getElementById('image_front');
+        const imageBackDiv = document.getElementById('image_back');
+
+        indexDiv.innerHTML = `Index: ${pokemonNumber}`;
+        imageFrontDiv.innerHTML = `<img src="${data.sprites.front_default}" alt="Front Image">`;
+        imageBackDiv.innerHTML = `<img src="${data.sprites.back_default}" alt="Back Image">`;
+      })
+  })
+
+  // ...
+})
+     </script>
+
+</body>
+</html>
